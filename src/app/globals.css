@@ -1,0 +1,335 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+:root {
+  --midnight: #071426;
+  --deep-navy: #0b1e3a;
+  --cyan: #00b8f5;
+  --royal: #246bfd;
+  --violet: #725cff;
+  --off-white: #f5f8ff;
+  --cool-gray: #94a3b8;
+  --background: var(--midnight);
+  --foreground: var(--off-white);
+  --surface: rgba(11, 30, 58, 0.72);
+  --border: rgba(148, 163, 184, 0.18);
+  --glow: rgba(0, 184, 245, 0.35);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-midnight: var(--midnight);
+  --color-deep-navy: var(--deep-navy);
+  --color-cyan: var(--cyan);
+  --color-royal: var(--royal);
+  --color-violet: var(--violet);
+  --color-off-white: var(--off-white);
+  --color-cool-gray: var(--cool-gray);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-syne);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  /* Lenis owns wheel smoothing; keep native smooth only for reduced-motion fallback */
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  min-height: 100%;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(0, 184, 245, 0.12), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(114, 92, 255, 0.1), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(36, 107, 253, 0.08), transparent 55%),
+    linear-gradient(180deg, #071426 0%, #0b1e3a 45%, #071426 100%);
+}
+
+::selection {
+  background: rgba(0, 184, 245, 0.35);
+  color: #fff;
+}
+
+.gradient-text {
+  background: linear-gradient(105deg, var(--cyan) 0%, var(--royal) 45%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0, 184, 245, 0.7), rgba(114, 92, 255, 0.55));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.glass {
+  background: rgba(11, 30, 58, 0.55);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(105deg, var(--cyan), var(--royal));
+  box-shadow: 0 0 28px rgba(0, 184, 245, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 0 36px rgba(0, 184, 245, 0.4);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  color: var(--off-white);
+  border: 1px solid rgba(114, 92, 255, 0.55);
+  background: rgba(11, 30, 58, 0.4);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--cyan);
+  background: rgba(0, 184, 245, 0.08);
+  transform: translateY(-1px);
+}
+
+.magnetic-btn {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, filter 0.2s ease,
+    border-color 0.2s ease, background 0.2s ease;
+}
+
+.magnetic-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(0, 184, 245, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 184, 245, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+}
+
+.shimmer-text {
+  background-size: 200% auto;
+  animation: shimmer 4.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 5s ease-in-out infinite;
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-orbit {
+  animation-name: orbit-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-orbit-reverse {
+  animation-name: orbit-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+}
+
+@keyframes testimonial-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes testimonial-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-testimonial-up {
+  animation-name: testimonial-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-testimonial-down {
+  animation-name: testimonial-down;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes testimonial-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-testimonial-progress {
+  transform-origin: left center;
+  animation: testimonial-progress linear forwards;
+}
+
+@keyframes testimonial-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes testimonial-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-testimonial-left {
+  animation-name: testimonial-left;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-testimonial-right {
+  animation-name: testimonial-right;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.section-pad {
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-pad {
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .shimmer-text,
+  .animate-pulse-glow,
+  .animate-orbit,
+  .animate-orbit-reverse,
+  .animate-testimonial-up,
+  .animate-testimonial-down,
+  .animate-testimonial-progress,
+  .animate-testimonial-left,
+  .animate-testimonial-right {
+    animation: none !important;
+  }
+}

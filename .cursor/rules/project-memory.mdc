@@ -1,0 +1,25 @@
+---
+description: Keep PROJECT_MEMORY.md as the agent source of truth for structure and changes
+alwaysApply: true
+---
+
+# Project Memory Protocol
+
+Before exploring the codebase broadly, read [`PROJECT_MEMORY.md`](PROJECT_MEMORY.md) first.
+
+## Required workflow
+
+1. **Start from memory** — Use Snapshot, Structure, Routes, Data model, and Brand sections for orientation. Do not re-scan the whole repo unless memory is missing what you need.
+2. **Prefer updating memory over re-discovering** — After any meaningful add, update, delete, or rename that changes structure, routes, schema, env, or behavior:
+   - Refresh the relevant Snapshot / Structure / Routes / Data model / Brand sections (keep them skim-friendly; no full file dumps).
+   - Append a reverse-chronological **Changelog** entry with: date, what changed, key files touched, why.
+3. **Keep it short** — One-line purposes, tables, and bullets only. Never paste large code blocks into `PROJECT_MEMORY.md`.
+
+## Changelog entry format
+
+```markdown
+### YYYY-MM-DD — Short title
+- **Changed:** …
+- **Files:** `path/a`, `path/b`
+- **Why:** …
+```
