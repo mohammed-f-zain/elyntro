@@ -46,13 +46,45 @@ Palette: Midnight Navy, Deep Navy, Electric Cyan, Royal Blue, Electric Violet, O
 - [Development](docs/DEVELOPMENT.md)
 - Agent map / changelog: [PROJECT_MEMORY.md](PROJECT_MEMORY.md)
 
+## Deploy (free — Vercel)
+
+Best free host for Next.js. SQLite is bundled as `prisma/deploy.db` for a demo (reads work; admin/contact writes may fail on serverless — fine for a preview).
+
+1. Push to GitHub (already on `main`).
+2. Open [vercel.com/new](https://vercel.com/new) → import `elyntro`.
+3. Set environment variables:
+
+| Variable | Value |
+|----------|-------|
+| `DATABASE_URL` | `file:./deploy.db` |
+| `SESSION_SECRET` | any long random string |
+| `ADMIN_EMAIL` | `admin@elyntro.com` |
+| `ADMIN_PASSWORD` | your password |
+| `NEXT_PUBLIC_SITE_URL` | your `*.vercel.app` URL (update after first deploy) |
+
+4. Deploy. Site will be at `https://elyntro-….vercel.app`.
+
+Or from the project folder (requires a free Vercel account):
+
+```bash
+npx vercel login
+npx vercel --prod
+```
+
+Refresh the bundled DB after content changes:
+
+```bash
+npm run db:prepare-deploy
+```
+
 ## Scripts
 
 ```bash
-npm run dev        # development
-npm run build      # production build
-npm run start      # production server
-npm run lint       # eslint
-npm run db:seed    # seed admin + CMS defaults
-npm run db:studio  # Prisma Studio
+npm run dev              # development
+npm run build            # production build
+npm run start            # production server
+npm run lint             # eslint
+npm run db:seed          # seed admin + CMS defaults
+npm run db:prepare-deploy # seed + copy prisma/deploy.db for Vercel
+npm run db:studio        # Prisma Studio
 ```

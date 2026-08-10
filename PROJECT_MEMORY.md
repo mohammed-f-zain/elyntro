@@ -92,6 +92,11 @@
 
 ## Changelog
 
+### 2026-08-10 — Free Vercel deploy prep
+- **Changed:** Bundled `prisma/deploy.db`, tracing includes, build runs `prisma generate`, README deploy steps, vercel.json DATABASE_URL
+- **Files:** `prisma/deploy.db`, `next.config.ts`, `.gitignore`, `package.json`, `vercel.json`, `README.md`, `.env.example`
+- **Why:** Temporary free hosting on Vercel for the marketing site
+
 ### 2026-08-10 — Custom cursor + glow
 - **Changed:** Desktop custom cursor (white dot + thin ring) with cyan/violet glow trail; hides native cursor on fine pointers
 - **Files:** `CustomCursor.tsx`, `SiteEffects.tsx`, `globals.css`

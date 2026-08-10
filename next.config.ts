@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Bundle the seeded SQLite file so Vercel serverless can read CMS content
+  outputFileTracingIncludes: {
+    "/*": ["./prisma/deploy.db", "./prisma/schema.prisma"],
+  },
 };
 
 export default nextConfig;

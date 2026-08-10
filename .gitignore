@@ -37,6 +37,7 @@ yarn-error.log*
 # sqlite
 /prisma/*.db
 /prisma/*.db-journal
+!/prisma/deploy.db
 
 # user uploads (keep folder via .gitkeep)
 /public/uploads/**
