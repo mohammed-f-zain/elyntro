@@ -1,5 +1,6 @@
 import { CapabilityPanel } from "@/components/site/CapabilityPanel";
 import { HeroSection } from "@/components/site/HeroSection";
+import { HomeCta } from "@/components/site/HomeCta";
 import { ParallaxBlock, SectionReveal } from "@/components/site/SectionReveal";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { ServicesCarousel } from "@/components/site/ServicesCarousel";
@@ -141,6 +142,11 @@ export default async function HomePage() {
           </SectionReveal>
         </div>
       </section>
+
+      <HomeCta
+        primaryLabel={settings.ctaPrimary || "Start a Project"}
+        secondaryLabel={settings.ctaSecondary || "Explore Solutions"}
+      />
     </>
   );
 }

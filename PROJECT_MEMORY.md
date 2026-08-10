@@ -25,7 +25,7 @@
 | `src/app/admin/(dashboard)/` | Overview, Messages, Pages, Services, Testimonials, SEO, Settings |
 | `src/app/api/contact/` | Public contact form submit |
 | `src/app/api/admin/` | Authenticated CMS APIs (incl. upload + testimonials) |
-| `src/components/site/` | Navbar, Footer, BrandLogo, Hero, GlassStack, TechnologiesSection, AmbientOrbits, ServiceCard, SmoothScroll |
+| `src/components/site/` | Navbar, Footer, BrandLogo, Hero, HomeCta, CustomCursor, GlassStack, TechnologiesSection, AmbientOrbits, ServiceCard, SmoothScroll |
 | `public/uploads/testimonials/` | Admin-uploaded testimonial images |
 | `public/testimonials/` | Seed avatar placeholders |
 | `src/components/admin/` | AdminShell |
@@ -50,7 +50,7 @@
 ## Routes
 
 ### Public
-- `/` Home — hero · trust · services · technologies mesh · delivery
+- `/` Home — hero · trust · services · technologies mesh · delivery · CTA
 - `/services` Services (Software Development, AI & Automation, Enterprise Solutions)
 - `/solutions` Solutions hub
 - `/about` About
@@ -91,6 +91,21 @@
 - **Look:** Dark navy tech UI, full-bleed hero, R3F network scene, glass cards
 
 ## Changelog
+
+### 2026-08-10 — Custom cursor + glow
+- **Changed:** Desktop custom cursor (white dot + thin ring) with cyan/violet glow trail; hides native cursor on fine pointers
+- **Files:** `CustomCursor.tsx`, `SiteEffects.tsx`, `globals.css`
+- **Why:** User requested cursor matching reference image plus following glow
+
+### 2026-08-10 — Home CTA section
+- **Changed:** Added full-width home CTA band with royal→violet gradients and dual buttons (contact / solutions)
+- **Files:** `HomeCta.tsx`, `page.tsx`
+- **Why:** User asked for a CTA section using purple and blue brand colors
+
+### 2026-08-10 — Scroll to top on navigate/refresh
+- **Changed:** Disable browser scroll restoration; reset Lenis/window scroll to top on pathname change
+- **Files:** `SmoothScroll.tsx`
+- **Why:** Page kept previous scroll position when changing routes or refreshing
 
 ### 2026-08-10 — Fix search scroll jump on mobile
 - **Changed:** Services carousel autoplay no longer uses `scrollIntoView` (was yanking the page up while typing in Technologies); scrolls the horizontal scroller only and pauses when off-screen

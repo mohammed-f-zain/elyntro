@@ -53,6 +53,18 @@ body {
   min-height: 100%;
 }
 
+html.custom-cursor,
+html.custom-cursor body,
+html.custom-cursor a,
+html.custom-cursor button,
+html.custom-cursor input,
+html.custom-cursor textarea,
+html.custom-cursor select,
+html.custom-cursor label,
+html.custom-cursor [role="button"] {
+  cursor: none !important;
+}
+
 body::before {
   content: "";
   position: fixed;
