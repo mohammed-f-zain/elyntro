@@ -25,7 +25,7 @@
 | `src/app/admin/(dashboard)/` | Overview, Messages, Pages, Services, Testimonials, SEO, Settings |
 | `src/app/api/contact/` | Public contact form submit |
 | `src/app/api/admin/` | Authenticated CMS APIs (incl. upload + testimonials) |
-| `src/components/site/` | Navbar, Footer, BrandLogo, Hero, HomeCta, CustomCursor, GlassStack, TechnologiesSection, AmbientOrbits, ServiceCard, ServicesCatalog, SmoothScroll |
+| `src/components/site/` | Navbar, Footer, BrandLogo, Hero, HomeCta, CustomCursor, GlassStack, TechnologiesSection, AmbientOrbits, ServiceCard, ServicesCatalog, ProcessTimeline (scroll-lit), SmoothScroll |
 | `public/uploads/testimonials/` | Admin-uploaded testimonial images |
 | `public/testimonials/` | Seed avatar placeholders |
 | `src/components/admin/` | AdminShell |
@@ -51,13 +51,13 @@
 
 ### Public
 - `/` Home — hero · trust · services · technologies mesh · delivery · CTA
-- `/services` Services — 7 guide offerings (website, mobile, systems, landing, AI/automation, consulting, maintenance) with varied section layouts + How we work
+- `/services` Services — interactive 7-service catalog + scroll-lit How we work timeline + CTA
 - `/solutions` Solutions hub
 - `/about` About
 - `/contact` Contact form → `POST /api/contact`
 
 ### Planned later (not built yet)
-- How we work · Previous projects · richer contact block on home
+- Previous projects · richer contact block on home
 - Dedicated `/services/[slug]` and `/solutions/[slug]` SEO pages
 
 ### Admin
@@ -93,20 +93,40 @@
 
 ## Changelog
 
-### 2026-08-12 — Services interactive stage
-- **Changed:** Replaced text-chapter layout with immersive interactive stage (autoplay + strip selector + per-service animated art)
-- **Files:** `ServicesCatalog.tsx`, `(site)/services/page.tsx`
-- **Why:** Previous layouts felt like stacked text/cards; needed a modern visual explorer for seven services
+### 2026-08-12 — Services equal section spacing
+- **Changed:** Unified Services page vertical rhythm (`gap-24` / `md:gap-32`) across hero, catalog, How we work, and CTA; ProcessTimeline accepts `className`
+- **Files:** `(site)/services/page.tsx`, `ProcessTimeline.tsx`
+- **Why:** Section gaps were uneven
 
-### 2026-08-12 — Services editorial chapter redesign
-- **Changed:** Replaced card stack with sticky chapter rail + numbered editorial scroll chapters and abstract visuals per service
+### 2026-08-12 — How we work spacing + line past last dot
+- **Changed:** More vertical spacing around Process section; timeline track extends past the final dot to the row end; denser gaps between steps
+- **Files:** `ProcessTimeline.tsx`, `(site)/services/page.tsx`
+- **Why:** User asked for roomier sections and a line that completes after the last point
+
+### 2026-08-12 — How we work timeline polish
+- **Changed:** Timeline line aligns to heading start (not squeezed); LTR left-aligned steps; soft circular radial glows (no boxed blur); richer Process heading with eyebrow + gradient
+- **Files:** `ProcessTimeline.tsx`, `PROJECT_MEMORY.md`
+- **Why:** Match reference alignment and glow quality with Elyntro blue
+
+### 2026-08-12 — How we work scroll-lit timeline
+- **Changed:** Rebuilt `ProcessTimeline` as a reference-style horizontal (desktop) / vertical (mobile) path: gray track + light cyan dots initially; line fills primary cyan→royal and dots/numbers glow as the section scrolls into view
+- **Files:** `ProcessTimeline.tsx`, `PROJECT_MEMORY.md`
+- **Why:** Match attached timeline reference with Elyntro blue lighting on scroll
+
+### 2026-08-12 — Services stage containment + systems art
+- **Changed:** Kept solid stage look; blur frame wraps full catalog; removed hop/overflow animations; rebuilt Custom Business Systems stacked panel visual
 - **Files:** `ServicesCatalog.tsx`, `(site)/services/page.tsx`
-- **Why:** Card layouts felt generic for seven services; need a creative journey format
+- **Why:** Stage content was hopping out of the soft background; 3rd service figure was broken
+
+### 2026-08-12 — Services interactive stage
+- **Changed:** Interactive service stage (selector under heading, autoplay, per-service art); CTAs/arrows refined
+- **Files:** `ServicesCatalog.tsx`, `(site)/services/page.tsx`, `company.ts`, `ServiceIcon.tsx`, `prisma/seed.ts`
+- **Why:** Content guide services with a modern visual explorer
 
 ### 2026-08-12 — Services page content guide
-- **Changed:** Rebuilt `/services` around seven guide offerings with varied premium layouts; seed/CMS service catalog; services process steps; jump nav + future slug paths
-- **Files:** `ServicesCatalog.tsx`, `(site)/services/page.tsx`, `company.ts`, `ServiceIcon.tsx`, `ProcessTimeline.tsx`, `prisma/seed.ts`, `(site)/page.tsx`
-- **Why:** Align Services with Elyntro Website Content Guide without rebuilding the whole site
+- **Changed:** Seven guide offerings, services process steps, SEO/seed updates, home service filter fallback
+- **Files:** `ServicesCatalog.tsx`, `(site)/services/page.tsx`, `company.ts`, `ServiceIcon.tsx`, `ProcessTimeline.tsx`, `prisma/seed.ts`, `(site)/page.tsx`, `docs/Elyntro_Website_Content_Guide.pdf`
+- **Why:** Align Services with Elyntro Website Content Guide
 
 ### 2026-08-10 — Free Vercel deploy prep
 - **Changed:** Bundled `prisma/deploy.db`, tracing includes, build runs `prisma generate`, README deploy steps, vercel.json DATABASE_URL

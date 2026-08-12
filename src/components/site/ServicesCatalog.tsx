@@ -85,10 +85,14 @@ function StageArt({ service, reduce }: { service: ServiceOffering; reduce: boole
           <motion.div
             key={phone}
             className="relative h-[70%] w-[38%] max-w-[150px] overflow-hidden rounded-[2rem] border border-white/15 bg-gradient-to-b from-royal/25 to-midnight/80"
-            initial={reduce ? false : { y: 30, opacity: 0 }}
-            animate={{ y: phone ? -12 : 12, opacity: 1 }}
+            initial={reduce ? false : { y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 120, damping: 18, delay: phone * 0.1 }}
-            style={{ boxShadow: `0 30px 80px ${accent.glow}` }}
+            style={{
+              boxShadow: `0 30px 80px ${accent.glow}`,
+              marginTop: phone ? 0 : 16,
+              marginBottom: phone ? 16 : 0,
+            }}
           >
             <div className="mx-auto mt-3 h-1.5 w-10 rounded-full bg-white/20" />
             <div className="mt-6 space-y-2 px-3">
@@ -108,37 +112,61 @@ function StageArt({ service, reduce }: { service: ServiceOffering; reduce: boole
 
   if (service.treatment === "panel") {
     return (
-      <div className="relative flex h-full items-center justify-center [perspective:900px]">
-        {[0, 1, 2, 3].map((layer) => (
-          <motion.div
-            key={layer}
-            className="absolute h-[55%] w-[58%] rounded-2xl border border-violet/30 bg-deep-navy/60 backdrop-blur-sm"
-            style={{
-              transform: `translateY(${layer * -18}px) translateZ(${layer * 24}px) rotateX(18deg) rotateY(-18deg)`,
-              boxShadow: layer === 3 ? `0 40px 100px ${accent.glow}` : undefined,
-            }}
-            animate={
-              reduce
-                ? undefined
-                : {
-                    y: [layer * -18, layer * -18 - 6, layer * -18],
-                  }
-            }
-            transition={{ duration: 3 + layer * 0.2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <div className="flex h-full flex-col p-4">
-              <div className="mb-3 flex gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-violet/70" />
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan/50" />
+      <div className="relative flex h-full items-center justify-center overflow-hidden px-6 py-8">
+        <div className="relative h-[78%] w-full max-w-md">
+          {[0, 1, 2].map((layer) => (
+            <motion.div
+              key={layer}
+              className="absolute inset-x-0 rounded-2xl border border-violet/35 bg-deep-navy/75 backdrop-blur-sm"
+              style={{
+                height: "58%",
+                top: `${12 + layer * 14}%`,
+                left: `${8 + layer * 5}%`,
+                right: `${8 + (2 - layer) * 5}%`,
+                zIndex: layer + 1,
+                boxShadow:
+                  layer === 2
+                    ? `0 28px 70px ${accent.glow}`
+                    : "0 12px 30px rgba(0,0,0,0.25)",
+              }}
+              initial={reduce ? false : { opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: layer * 0.1, duration: 0.45 }}
+            >
+              <div className="flex h-full flex-col p-4">
+                <div className="mb-3 flex items-center justify-between">
+                  <div className="flex gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-violet/80" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-cyan/60" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-royal/50" />
+                  </div>
+                  <span className="text-[0.6rem] uppercase tracking-[0.18em] text-cool-gray">
+                    {layer === 2 ? "CRM" : layer === 1 ? "Ops" : "Data"}
+                  </span>
+                </div>
+                <div className="grid flex-1 grid-cols-3 gap-2">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="rounded-md bg-white/[0.06]"
+                      style={{
+                        opacity: 0.45 + ((i + layer) % 3) * 0.2,
+                      }}
+                    />
+                  ))}
+                </div>
+                {layer === 2 && (
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="h-2 flex-1 rounded-full bg-white/10">
+                      <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-violet to-cyan" />
+                    </div>
+                    <ServiceIcon icon={service.icon} className="h-4 w-4 text-violet" />
+                  </div>
+                )}
               </div>
-              <div className="grid flex-1 grid-cols-3 gap-2">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <div key={i} className="rounded-md bg-white/5" />
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -281,15 +309,13 @@ function StageArt({ service, reduce }: { service: ServiceOffering; reduce: boole
             ))}
           </div>
           <div className="mt-8 grid grid-cols-4 gap-2">
-            {["Fix", "Patch", "Backup", "Ship"].map((label, i) => (
-              <motion.div
+            {["Fix", "Patch", "Backup", "Ship"].map((label) => (
+              <div
                 key={label}
                 className="rounded-xl border border-white/10 bg-deep-navy/50 py-3 text-center text-[0.65rem] uppercase tracking-[0.14em] text-[#B8C4D8]"
-                animate={reduce ? undefined : { y: [0, -4, 0] }}
-                transition={{ duration: 2.4, delay: i * 0.2, repeat: Infinity }}
               >
                 {label}
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -299,7 +325,7 @@ function StageArt({ service, reduce }: { service: ServiceOffering; reduce: boole
 
   // featured — website
   return (
-    <div className="relative flex h-full items-center justify-center px-6">
+    <div className="relative flex h-full items-center justify-center overflow-hidden px-6 py-8">
       <motion.div
         className="relative w-full max-w-xl overflow-hidden rounded-[1.5rem] border border-cyan/25 bg-deep-navy/70"
         style={{ boxShadow: `0 40px 120px ${accent.glow}` }}
@@ -337,9 +363,7 @@ function StageArt({ service, reduce }: { service: ServiceOffering; reduce: boole
         </div>
       </motion.div>
       <motion.div
-        className="absolute -bottom-2 right-[12%] hidden h-28 w-44 rounded-xl border border-violet/30 bg-midnight/80 p-3 backdrop-blur md:block"
-        animate={reduce ? undefined : { y: [0, -8, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity }}
+        className="absolute bottom-10 right-[10%] hidden h-28 w-44 rounded-xl border border-violet/30 bg-midnight/80 p-3 backdrop-blur md:block"
       >
         <div className="mb-2 text-[0.6rem] uppercase tracking-[0.2em] text-violet">SEO · Speed</div>
         <div className="h-2 rounded bg-violet/40" />
@@ -576,7 +600,7 @@ export function ServicesCatalog({ services }: ServicesCatalogProps) {
           </div>
 
           {/* Visual stage */}
-          <div className="relative min-h-[22rem] border-t border-white/10 lg:min-h-0 lg:border-l lg:border-t-0">
+          <div className="relative min-h-[22rem] overflow-hidden border-t border-white/10 lg:min-h-0 lg:border-l lg:border-t-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.slug}
