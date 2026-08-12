@@ -154,9 +154,15 @@ async function main() {
     update: {
       sections: {
         hero: {
-          title: "Engineering services that ship.",
+          title: "Technology services built around your business.",
           subtitle:
-            "From custom software to AI automation and enterprise platforms—scoped around outcomes, owned end to end.",
+            "From high-performing websites and mobile applications to custom business systems, AI automation, and ongoing technical support, Elyntro turns ideas and operational challenges into reliable digital solutions.",
+        },
+        cta: {
+          title: "Have an idea—or a process that needs improving?",
+          subtitle:
+            "Tell us what you want to build, fix, or automate. We will help you identify the right approach and define a practical next step.",
+          button: "Start Your Project",
         },
       },
     },
@@ -164,9 +170,15 @@ async function main() {
       slug: "services",
       sections: {
         hero: {
-          title: "Engineering services that ship.",
+          title: "Technology services built around your business.",
           subtitle:
-            "From custom software to AI automation and enterprise platforms—scoped around outcomes, owned end to end.",
+            "From high-performing websites and mobile applications to custom business systems, AI automation, and ongoing technical support, Elyntro turns ideas and operational challenges into reliable digital solutions.",
+        },
+        cta: {
+          title: "Have an idea—or a process that needs improving?",
+          subtitle:
+            "Tell us what you want to build, fix, or automate. We will help you identify the right approach and define a practical next step.",
+          button: "Start Your Project",
         },
       },
     },
@@ -197,25 +209,53 @@ async function main() {
 
   const coreServices = [
     {
-      title: "Software Development",
+      title: "Website Development",
       description:
-        "Custom web products, APIs, and internal tools engineered for performance, scalability, and long-term ownership.",
-      icon: "code",
+        "We design and develop fast, responsive websites that communicate your value clearly, strengthen your credibility, and help turn visitors into customers.",
+      icon: "globe",
       sortOrder: 1,
     },
     {
-      title: "AI & Automation",
+      title: "Mobile App Development",
       description:
-        "Practical AI workflows and automation that remove friction, reduce manual work, and accelerate decisions.",
-      icon: "spark",
+        "We build intuitive mobile applications for iOS and Android that connect your customers, employees, and operations wherever they are.",
+      icon: "mobile",
       sortOrder: 2,
     },
     {
-      title: "Enterprise Solutions",
+      title: "Custom Business Systems",
       description:
-        "Secure platforms and integrations for complex organizations—identity, data, and operational systems that scale.",
-      icon: "cube",
+        "When off-the-shelf software cannot support your workflow, we build a system around the way your business actually operates.",
+      icon: "systems",
       sortOrder: 3,
+    },
+    {
+      title: "Landing Page Development",
+      description:
+        "We create focused landing pages for products, services, campaigns, and new business launches—designed to capture attention and encourage action.",
+      icon: "landing",
+      sortOrder: 4,
+    },
+    {
+      title: "AI & Workflow Automation",
+      description:
+        "We help businesses automate repetitive work, connect disconnected tools, and use AI where it creates real operational value.",
+      icon: "spark",
+      sortOrder: 5,
+    },
+    {
+      title: "Technical Consulting & Support",
+      description:
+        "We provide practical technical guidance to help you make confident decisions, solve problems, and choose the right technology for your business.",
+      icon: "consult",
+      sortOrder: 6,
+    },
+    {
+      title: "Maintenance & Continuous Improvement",
+      description:
+        "Launching a solution is only the beginning. We keep your website, application, or business system secure, stable, and ready to evolve.",
+      icon: "shield",
+      sortOrder: 7,
     },
   ];
 
@@ -377,8 +417,9 @@ async function main() {
     {
       path: "/services",
       title: "Services — Elyntro",
-      description: "Software development, AI & automation, and enterprise solutions.",
-      keywords: "services, software development, AI, enterprise",
+      description:
+        "Website, mobile, custom business systems, landing pages, AI automation, consulting, and maintenance services from Elyntro.",
+      keywords: "Elyntro services, website development, mobile apps, AI automation, business systems",
     },
     {
       path: "/solutions",
@@ -397,7 +438,11 @@ async function main() {
   for (const route of seoRoutes) {
     await prisma.seoMeta.upsert({
       where: { path: route.path },
-      update: {},
+      update: {
+        title: route.title,
+        description: route.description,
+        keywords: route.keywords,
+      },
       create: {
         ...route,
         ogImage: "/brand/Logo.jpeg",

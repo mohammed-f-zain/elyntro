@@ -1,5 +1,6 @@
 /** Shared marketing copy for Elyntro as a software company. */
 
+/** Default engagement rhythm used on About / Solutions until those pages are revised. */
 export const processSteps = [
   {
     step: "01",
@@ -23,38 +24,172 @@ export const processSteps = [
   },
 ];
 
-export const serviceDetails: Record<
-  string,
-  { points: string[]; outcome: string }
-> = {
-  "Software Development": {
-    points: [
-      "Web apps, APIs, and admin dashboards",
-      "Modern TypeScript / Node stacks",
-      "CI/CD, testing, and release automation",
-      "Performance and accessibility baked in",
-    ],
-    outcome: "Ship a production-ready product in weeks, not quarters.",
+/** Services process — Understand → Launch & Improve (content guide). */
+export const servicesProcessSteps = [
+  {
+    step: "01",
+    title: "Understand",
+    body: "We learn about your goals, customers, current processes, and technical requirements.",
   },
-  "AI & Automation": {
-    points: [
-      "Workflow automation and internal agents",
-      "Document, support, and ops copilots",
-      "Secure model integration patterns",
-      "Human-in-the-loop controls where needed",
-    ],
-    outcome: "Cut repetitive work and accelerate decisions with practical AI.",
+  {
+    step: "02",
+    title: "Plan",
+    body: "We define the solution, scope, priorities, timeline, and delivery approach.",
   },
-  "Enterprise Solutions": {
-    points: [
-      "Platform modernization and integrations",
-      "Identity, permissions, and audit trails",
-      "Data pipelines and reporting layers",
-      "Hardening for security and scale",
-    ],
-    outcome: "Connect complex systems into one reliable operating layer.",
+  {
+    step: "03",
+    title: "Build",
+    body: "We design and develop in clear stages, with regular updates and opportunities for feedback.",
   },
+  {
+    step: "04",
+    title: "Launch & Improve",
+    body: "We deploy, document, support, and continuously improve the solution when required.",
+  },
+];
+
+export type ServiceTreatment =
+  | "featured"
+  | "split"
+  | "panel"
+  | "compact"
+  | "dynamic"
+  | "strategic"
+  | "stable";
+
+export type ServiceOffering = {
+  slug: string;
+  title: string;
+  description: string;
+  points: string[];
+  outcome: string;
+  icon: string;
+  treatment: ServiceTreatment;
+  /** Future dedicated page path. */
+  href: string;
 };
+
+/** Canonical service catalog from the Elyntro Website Content Guide. */
+export const serviceOfferings: ServiceOffering[] = [
+  {
+    slug: "website-development",
+    title: "Website Development",
+    description:
+      "We design and develop fast, responsive websites that communicate your value clearly, strengthen your credibility, and help turn visitors into customers.",
+    points: [
+      "Corporate and service websites",
+      "Responsive UI/UX across all devices",
+      "Content management and admin dashboards",
+      "SEO, performance, and analytics foundations",
+    ],
+    outcome: "A professional digital presence designed to grow with your business.",
+    icon: "globe",
+    treatment: "featured",
+    href: "/services/website-development",
+  },
+  {
+    slug: "mobile-app-development",
+    title: "Mobile App Development",
+    description:
+      "We build intuitive mobile applications for iOS and Android that connect your customers, employees, and operations wherever they are.",
+    points: [
+      "Cross-platform mobile applications",
+      "User experience and interface design",
+      "Backend, API, and database integration",
+      "Testing, deployment, and release support",
+    ],
+    outcome: "A reliable mobile experience that makes your services easier to access and use.",
+    icon: "mobile",
+    treatment: "split",
+    href: "/services/mobile-app-development",
+  },
+  {
+    slug: "custom-business-systems",
+    title: "Custom Business Systems",
+    description:
+      "When off-the-shelf software cannot support your workflow, we build a system around the way your business actually operates.",
+    points: [
+      "CRM and operations management systems",
+      "Internal portals and admin dashboards",
+      "Approvals, permissions, and automated workflows",
+      "Reporting, integrations, and data migration",
+    ],
+    outcome: "One connected system that reduces manual work and gives your team better control.",
+    icon: "systems",
+    treatment: "panel",
+    href: "/services/custom-business-systems",
+  },
+  {
+    slug: "landing-page-development",
+    title: "Landing Page Development",
+    description:
+      "We create focused landing pages for products, services, campaigns, and new business launches—designed to capture attention and encourage action.",
+    points: [
+      "Conversion-focused page structure",
+      "Responsive design and development",
+      "Contact forms, WhatsApp, CRM, and analytics integration",
+      "Performance and SEO optimization",
+    ],
+    outcome: "A focused, high-performing page built to generate leads and support your campaigns.",
+    icon: "landing",
+    treatment: "compact",
+    href: "/services/landing-page-development",
+  },
+  {
+    slug: "ai-workflow-automation",
+    title: "AI & Workflow Automation",
+    description:
+      "We help businesses automate repetitive work, connect disconnected tools, and use AI where it creates real operational value.",
+    points: [
+      "Business process and automation analysis",
+      "AI assistants and intelligent workflows",
+      "n8n, API, and system integrations",
+      "Document processing, notifications, and data synchronization",
+    ],
+    outcome: "Faster operations, fewer manual tasks, and more time for meaningful work.",
+    icon: "spark",
+    treatment: "dynamic",
+    href: "/services/ai-workflow-automation",
+  },
+  {
+    slug: "technical-consulting-support",
+    title: "Technical Consulting & Support",
+    description:
+      "We provide practical technical guidance to help you make confident decisions, solve problems, and choose the right technology for your business.",
+    points: [
+      "Technology and architecture recommendations",
+      "Technical audits and troubleshooting",
+      "Integration and deployment guidance",
+      "Project planning and technical roadmaps",
+    ],
+    outcome: "Clear technical direction without unnecessary complexity.",
+    icon: "consult",
+    treatment: "strategic",
+    href: "/services/technical-consulting-support",
+  },
+  {
+    slug: "maintenance-continuous-improvement",
+    title: "Maintenance & Continuous Improvement",
+    description:
+      "Launching a solution is only the beginning. We keep your website, application, or business system secure, stable, and ready to evolve.",
+    points: [
+      "Bug fixes and software updates",
+      "Performance and security monitoring",
+      "Backups and deployment management",
+      "Feature improvements and ongoing support",
+    ],
+    outcome: "A dependable digital product that continues performing as your business grows.",
+    icon: "shield",
+    treatment: "stable",
+    href: "/services/maintenance-continuous-improvement",
+  },
+];
+
+/** Lookup helpers for cards that still key by title (home carousel, CMS). */
+export const serviceDetails: Record<string, { points: string[]; outcome: string; slug?: string }> =
+  Object.fromEntries(
+    serviceOfferings.map((s) => [s.title, { points: s.points, outcome: s.outcome, slug: s.slug }]),
+  );
 
 export const industries = [
   {

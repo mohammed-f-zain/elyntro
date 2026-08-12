@@ -37,10 +37,13 @@ export default async function HomePage() {
   const hero = content?.hero;
   const stats = content?.stats ?? [];
   const servicesIntro = content?.servicesIntro;
+  const primaryTitles = [
+    "Website Development",
+    "AI & Workflow Automation",
+    "Custom Business Systems",
+  ];
   const primaryServices = services
-    .filter((s) =>
-      ["Software Development", "AI & Automation", "Enterprise Solutions"].includes(s.title),
-    )
+    .filter((s) => primaryTitles.includes(s.title))
     .slice(0, 3);
   const displayServices = primaryServices.length === 3 ? primaryServices : services.slice(0, 3);
 

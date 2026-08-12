@@ -3,9 +3,21 @@
 import { motion } from "framer-motion";
 
 import { useHydrationSafeReducedMotion } from "@/lib/motion";
-import { processSteps } from "@/lib/company";
+import { processSteps as defaultProcessSteps } from "@/lib/company";
 
-export function ProcessTimeline({ title = "How engagements run" }: { title?: string }) {
+type ProcessStep = {
+  step: string;
+  title: string;
+  body: string;
+};
+
+export function ProcessTimeline({
+  title = "How engagements run",
+  steps = defaultProcessSteps,
+}: {
+  title?: string;
+  steps?: ProcessStep[];
+}) {
   const reduce = useHydrationSafeReducedMotion();
 
   return (
@@ -20,7 +32,7 @@ export function ProcessTimeline({ title = "How engagements run" }: { title?: str
       </motion.h2>
       <div className="relative mt-10 grid gap-5 md:grid-cols-4">
         <div className="pointer-events-none absolute left-0 right-0 top-8 hidden h-px bg-gradient-to-r from-cyan/0 via-cyan/40 to-violet/0 md:block" />
-        {processSteps.map((item, index) => (
+        {steps.map((item, index) => (
           <motion.article
             key={item.step}
             initial={reduce ? false : { opacity: 0, y: 28 }}

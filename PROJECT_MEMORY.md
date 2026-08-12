@@ -25,7 +25,7 @@
 | `src/app/admin/(dashboard)/` | Overview, Messages, Pages, Services, Testimonials, SEO, Settings |
 | `src/app/api/contact/` | Public contact form submit |
 | `src/app/api/admin/` | Authenticated CMS APIs (incl. upload + testimonials) |
-| `src/components/site/` | Navbar, Footer, BrandLogo, Hero, HomeCta, CustomCursor, GlassStack, TechnologiesSection, AmbientOrbits, ServiceCard, SmoothScroll |
+| `src/components/site/` | Navbar, Footer, BrandLogo, Hero, HomeCta, CustomCursor, GlassStack, TechnologiesSection, AmbientOrbits, ServiceCard, ServicesCatalog, SmoothScroll |
 | `public/uploads/testimonials/` | Admin-uploaded testimonial images |
 | `public/testimonials/` | Seed avatar placeholders |
 | `src/components/admin/` | AdminShell |
@@ -51,13 +51,14 @@
 
 ### Public
 - `/` Home — hero · trust · services · technologies mesh · delivery · CTA
-- `/services` Services (Software Development, AI & Automation, Enterprise Solutions)
+- `/services` Services — 7 guide offerings (website, mobile, systems, landing, AI/automation, consulting, maintenance) with varied section layouts + How we work
 - `/solutions` Solutions hub
 - `/about` About
 - `/contact` Contact form → `POST /api/contact`
 
 ### Planned later (not built yet)
 - How we work · Previous projects · richer contact block on home
+- Dedicated `/services/[slug]` and `/solutions/[slug]` SEO pages
 
 ### Admin
 - `/admin/login`
@@ -91,6 +92,21 @@
 - **Look:** Dark navy tech UI, full-bleed hero, R3F network scene, glass cards
 
 ## Changelog
+
+### 2026-08-12 — Services interactive stage
+- **Changed:** Replaced text-chapter layout with immersive interactive stage (autoplay + strip selector + per-service animated art)
+- **Files:** `ServicesCatalog.tsx`, `(site)/services/page.tsx`
+- **Why:** Previous layouts felt like stacked text/cards; needed a modern visual explorer for seven services
+
+### 2026-08-12 — Services editorial chapter redesign
+- **Changed:** Replaced card stack with sticky chapter rail + numbered editorial scroll chapters and abstract visuals per service
+- **Files:** `ServicesCatalog.tsx`, `(site)/services/page.tsx`
+- **Why:** Card layouts felt generic for seven services; need a creative journey format
+
+### 2026-08-12 — Services page content guide
+- **Changed:** Rebuilt `/services` around seven guide offerings with varied premium layouts; seed/CMS service catalog; services process steps; jump nav + future slug paths
+- **Files:** `ServicesCatalog.tsx`, `(site)/services/page.tsx`, `company.ts`, `ServiceIcon.tsx`, `ProcessTimeline.tsx`, `prisma/seed.ts`, `(site)/page.tsx`
+- **Why:** Align Services with Elyntro Website Content Guide without rebuilding the whole site
 
 ### 2026-08-10 — Free Vercel deploy prep
 - **Changed:** Bundled `prisma/deploy.db`, tracing includes, build runs `prisma generate`, README deploy steps, vercel.json DATABASE_URL
